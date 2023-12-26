@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jackson-dataformat-xml-2.16.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../jackson-dataformat-xml-2.16.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
