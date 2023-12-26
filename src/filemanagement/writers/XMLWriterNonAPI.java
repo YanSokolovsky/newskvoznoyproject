@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class XMLWriterNonAPI extends Writer{
-    XMLWriterNonAPI(String name) {
+    public XMLWriterNonAPI(String name) {
         fileName = name;
     }
-    void write(ArrayList<String> results) {
+    public void write(ArrayList<String> results) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName));
             bufferedWriter.write("<data>");
