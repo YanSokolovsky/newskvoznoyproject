@@ -4,6 +4,8 @@ import forcrypto.decryptors.Decryptor;
 import forcrypto.encryptors.Encoder;
 import org.junit.jupiter.api.Test;
 
+import java.io.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -106,7 +108,28 @@ class DecryptorTest {
 
     @Test
     void decryptFile() {
-        Decryptor tr = new Decryptor("D:\\testing\\inputjson.enc", "wordforencriptin");
+        File file = new File("D:\\testing","encodedtxt.enc");
+        assertFalse(file.exists());
+        try {
+            BufferedWriter wr = new BufferedWriter(new FileWriter("D:\\testing\\encodedtxt.enc"));
+            wr.write("§ъs`$ИBа\u0019e\ts!афк");
+            wr.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Decryptor tr = new Decryptor("D:\\testing\\encodedtxt.enc", "wordforencriptin");
         tr.decryptFile();
+        File nf = new File("D:\\testing\\encoded.txt");
+        assertTrue(nf.exists());
+        String res;
+        try {
+            BufferedReader wr = new BufferedReader(new FileReader("D:\\testing\\encoded.txt"));
+            res = wr.readLine();
+            wr.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals("data to encrypt", res); //§ъs`$ИBаe	s!афк
+        nf.delete();
     }
 }

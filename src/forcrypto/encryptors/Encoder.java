@@ -8,6 +8,8 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Base64;
 
 public class Encoder extends Shivrator{
     String inputName;
@@ -20,21 +22,23 @@ public class Encoder extends Shivrator{
     public void encryptFile() {
         try {
             if (isDecoded(inputName)) {
+                byte[] decodedKey = Base64.getDecoder().decode(Key);
                 byte[] decodedData;
                 byte[] encryptedData;
                 File decodedfile = new File(inputName);
                 FileInputStream fileInputStream = new FileInputStream(decodedfile);
                 decodedData = fileInputStream.readAllBytes();
-                SecretKeySpec secretKeySpec = new SecretKeySpec(Key.getBytes(), "AES");
+                SecretKeySpec secretKeySpec = new SecretKeySpec(Arrays.copyOf(decodedKey, 16), "AES");
                 Cipher cipher = Cipher.getInstance("AES");
                 cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
-                encryptedData = cipher.doFinal(decodedData);
+                encryptedData = cipher.doFinal(Base64.getDecoder().decode(decodedData));
                 String encryptedFile = generateNewName(inputName);
                 File encodedfile = new File(encryptedFile);
                 fileInputStream.close();
                 boolean result = decodedfile.renameTo(encodedfile);
                 FileOutputStream fileOutputStream = new FileOutputStream(encryptedFile);
                 fileOutputStream.write(encryptedData);
+                fileOutputStream.close();
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

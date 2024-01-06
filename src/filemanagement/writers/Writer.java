@@ -1,6 +1,9 @@
 package filemanagement.writers;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,11 +19,12 @@ public abstract class Writer {
     }
 
     String fileName;
-    @XmlRootElement
+
+
     public static class text {
         public String expression;
     }
-    @XmlRootElement
+
     public static class data {
         public ArrayList<text> expressions;
     }

@@ -27,6 +27,7 @@ public class XMLWriterNonAPI extends Writer{
             bufferedWriter.write("  </expressions>");
             bufferedWriter.newLine();
             bufferedWriter.write("</data>");
+            bufferedWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

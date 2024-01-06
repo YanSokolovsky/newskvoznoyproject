@@ -3,6 +3,8 @@ package tests;
 import forcrypto.encryptors.Encoder;
 import org.junit.jupiter.api.Test;
 
+import java.io.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EncoderTest {
@@ -100,7 +102,28 @@ class EncoderTest {
     }
     @Test
     void encryptFileTest() {
-        Encoder tr = new Encoder("D:\\testing\\input.json", "wordforencriptin");
+        File file = new File("D:\\testing","encoded.txt");
+        assertFalse(file.exists());
+        try {
+            BufferedWriter wr = new BufferedWriter(new FileWriter("D:\\testing\\encoded.txt"));
+            wr.write("data to encrypt");
+            wr.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Encoder tr = new Encoder("D:\\testing\\encoded.txt", "wordforencriptin");
         tr.encryptFile();
+        File nf = new File("D:\\testing\\encodedtxt.enc");
+        assertTrue(nf.exists());
+        String res;
+        try {
+            BufferedReader wr = new BufferedReader(new FileReader("D:\\testing\\encodedtxt.enc"));
+            res = wr.readLine();
+            wr.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals("��s`$�B�\u0019e\ts!���", res); //§ъs`$ИBаe	s!афк
+        nf.delete();
     }
 }
