@@ -108,20 +108,22 @@ class DecryptorTest {
 
     @Test
     void decryptFile() {
-        File file = new File("D:\\testing","encodedtxt.enc");
+        File file = new File("D:\\testing","encoded.txt");
         assertFalse(file.exists());
         try {
-            BufferedWriter wr = new BufferedWriter(new FileWriter("D:\\testing\\encodedtxt.enc"));
-            wr.write("§ъs`$ИBа\u0019e\ts!афк");
+            BufferedWriter wr = new BufferedWriter(new FileWriter("D:\\testing\\encoded.txt"));
+            wr.write("data to enc");
             wr.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Decryptor tr = new Decryptor("D:\\testing\\encodedtxt.enc", "wordforencriptin");
-        tr.decryptFile();
-        File nf = new File("D:\\testing\\encoded.txt");
+        Encoder tr = new Encoder("D:\\testing\\encoded.txt", "wordforencriptin");
+        tr.encryptFile();
+        File nf = new File("D:\\testing\\encodedtxt.enc");
         assertTrue(nf.exists());
         String res;
+        Decryptor dec = new Decryptor("D:\\testing\\encodedtxt.enc","wordforencriptin");
+        dec.decryptFile();
         try {
             BufferedReader wr = new BufferedReader(new FileReader("D:\\testing\\encoded.txt"));
             res = wr.readLine();
@@ -129,7 +131,7 @@ class DecryptorTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        assertEquals("data to encrypt", res); //§ъs`$ИBаe	s!афк
-        nf.delete();
+        assertEquals(res, "data to enc");
+        file.delete();
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RarDearchivator extends Dearchivator {
-    RarDearchivator(String filename) {
+    public RarDearchivator(String filename) {
         archFile = filename;
         String address = getAddressOfFile(filename);
         address += "\\RarDearchiveResult\\";
@@ -23,9 +23,13 @@ public class RarDearchivator extends Dearchivator {
         return names;
     }
     @Override
-    ArrayList<String> dearchive() {
+    public ArrayList<String> dearchive() {
         List<File> files = new ArrayList<>();
         File rarFile = new File(archFile);
+        File directory = new File(standardName);
+        if (!directory.exists()){
+            directory.mkdirs();
+        }
         File destDir = new File(standardName);
         try {
             files = Junrar.extract(rarFile, destDir);
@@ -35,7 +39,7 @@ public class RarDearchivator extends Dearchivator {
         return getNames(files);
     }
     @Override
-    ArrayList<String> dearchive(String fileDestination) {
+    public ArrayList<String> dearchive(String fileDestination) {
         List<File> files = new ArrayList<>();
         File rarFile = new File(archFile);
         File destDir = new File(fileDestination);

@@ -1,10 +1,31 @@
 package forcrypto.decryptors;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class Decoder {
     String Key;
+    public void deleteLastKBytes(String filePath, int k) {
+        RandomAccessFile file = null;
+        try {
+            file = new RandomAccessFile(filePath, "rw");
+            long length = file.length();
+            length = length - k;
+            file.setLength(length);
+            file.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public byte[] extendArray(byte[] originalArray, int newSize) {
+        return Arrays.copyOf(originalArray, newSize);
+    }
     public String generateNewName(String filepath) {
         filepath = dellitingSlashes(filepath);
         if (!isDecoded(filepath)) {

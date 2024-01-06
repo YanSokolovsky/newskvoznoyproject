@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public abstract class Archivator {
 
-    ArrayList<String> nameOfFiles;
-    String nameOfRar;
-    void add(String name) {
+    public ArrayList<String> nameOfFiles;
+    public String nameOfRar;
+    public void add(String name) {
         nameOfFiles.add(name);
     }
-    void setFileNames(ArrayList<String> names) {
+    public void setFileNames(ArrayList<String> names) {
         nameOfFiles = names;
     }
-    void remove(String name) {
+    public void remove(String name) {
         nameOfFiles.remove(name);
     }
     abstract void archive();

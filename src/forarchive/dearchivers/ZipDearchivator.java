@@ -1,5 +1,6 @@
 package forarchive.dearchivers;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -7,15 +8,19 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class ZipDearchivator extends Dearchivator {
-    ZipDearchivator(String filename) {
+    public ZipDearchivator(String filename) {
         archFile = filename;
         String address = getAddressOfFile(filename);
         address += "\\ZipDearchiveResult\\";
         setStandardName(address);
     }
     @Override
-    ArrayList<String> dearchive() {
+    public ArrayList<String> dearchive() {
         ArrayList<String> names = new ArrayList<>();
+        File directory = new File(standardName);
+        if (!directory.exists()){
+            directory.mkdirs();
+        }
         try(ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(archFile)))
         {
             ZipEntry entry;
@@ -35,7 +40,7 @@ public class ZipDearchivator extends Dearchivator {
             }
         }
         catch(Exception ex){
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
         return names;
     }

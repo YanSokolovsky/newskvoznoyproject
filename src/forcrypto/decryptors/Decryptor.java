@@ -22,16 +22,15 @@ public class Decryptor extends Decoder{
     public void decryptFile() {
         try {
             if (!isDecoded(File)) {
-                byte[] decodedKey = Base64.getDecoder().decode(Key);
                 File oldfile = new File(File);
                 FileInputStream ins = new FileInputStream(File);
                 byte[] encryptedBytes;
                 byte[] decryptedBytes;
                 encryptedBytes = ins.readAllBytes();
-                SecretKeySpec keySpec = new SecretKeySpec(Arrays.copyOf(decodedKey, 16), "AES");
+                SecretKeySpec keySpec = new SecretKeySpec(Arrays.copyOf(Key.getBytes(), 16), "AES");
                 Cipher cipher = Cipher.getInstance("AES");
                 cipher.init(Cipher.DECRYPT_MODE, keySpec);
-                decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedBytes));
+                decryptedBytes = cipher.doFinal(encryptedBytes);
                 File newfile = new File(generateNewName(File));
                 ins.close();
                 oldfile.renameTo(newfile);

@@ -1,18 +1,21 @@
 package forarchive.archivers;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class RarArchivator extends Archivator {
-    RarArchivator(String name) {
+    public RarArchivator(String name) {
         nameOfRar = name;
+        nameOfFiles = new ArrayList<>();
     }
-    RarArchivator(String name, ArrayList<String> names) {
+    public RarArchivator(String name, ArrayList<String> names) {
         nameOfRar = name;
         nameOfFiles = names;
     }
     @Override
-    void archive() {
+    public void archive() {
+        File f = new File(nameOfRar);
         try {
             for (String sourceFile : nameOfFiles) {
                 String rarFile = nameOfRar;

@@ -1,5 +1,6 @@
 package tests;
 
+import forcrypto.decryptors.Decryptor;
 import forcrypto.encryptors.Encoder;
 import org.junit.jupiter.api.Test;
 
@@ -106,7 +107,7 @@ class EncoderTest {
         assertFalse(file.exists());
         try {
             BufferedWriter wr = new BufferedWriter(new FileWriter("D:\\testing\\encoded.txt"));
-            wr.write("data to encrypt");
+            wr.write("data to enc");
             wr.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -116,14 +117,16 @@ class EncoderTest {
         File nf = new File("D:\\testing\\encodedtxt.enc");
         assertTrue(nf.exists());
         String res;
+        Decryptor dec = new Decryptor("D:\\testing\\encodedtxt.enc","wordforencriptin");
+        dec.decryptFile();
         try {
-            BufferedReader wr = new BufferedReader(new FileReader("D:\\testing\\encodedtxt.enc"));
+            BufferedReader wr = new BufferedReader(new FileReader("D:\\testing\\encoded.txt"));
             res = wr.readLine();
             wr.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        assertEquals("��s`$�B�\u0019e\ts!���", res); //§ъs`$ИBаe	s!афк
-        nf.delete();
+        assertEquals(res, "data to enc");
+        file.delete();
     }
 }
