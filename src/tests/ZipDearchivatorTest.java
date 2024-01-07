@@ -16,5 +16,7 @@ class ZipDearchivatorTest {
 
     @Test
     void testDearchive() {
+        ZipDearchivator zip = new ZipDearchivator("D:\\testing\\output.zip");
+        zip.dearchive("D:\\testing\\Ziptest");
     }
 }

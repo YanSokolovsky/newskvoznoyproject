@@ -45,7 +45,7 @@ public class ZipDearchivator extends Dearchivator {
         return names;
     }
     @Override
-    ArrayList<String> dearchive(String fileDestination) {
+    public ArrayList<String> dearchive(String fileDestination) {
         fileDestination += "\\";
         ArrayList<String> names = new ArrayList<>();
         try(ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(archFile)))

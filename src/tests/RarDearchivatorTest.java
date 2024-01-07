@@ -19,5 +19,7 @@ class RarDearchivatorTest {
 
     @Test
     void testDearchive() {
+        RarDearchivator rar = new RarDearchivator("D:\\testing\\output.rar");
+        rar.dearchive("D:\\testing\\Rartest");
     }
 }
