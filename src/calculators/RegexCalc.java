@@ -70,10 +70,10 @@ public class RegexCalc extends Calculator {
         stringBuilder.deleteCharAt(0);
         stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         String res = removeExponentiation(stringBuilder.toString());
-        res = removeMultiplication(res);
         res = removeDivision(res);
-        res = removeSummation(res);
+        res = removeMultiplication(res);
         res = removeSubtraction(res);
+        res = removeSummation(res);
         return res;
     }
     public String calcExWithoutBrace2(String inputString) {

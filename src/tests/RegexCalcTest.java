@@ -1,5 +1,6 @@
 package tests;
 
+import calculators.MyCalc;
 import calculators.RegexCalc;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,10 @@ class RegexCalcTest {
 
     @Test
     void calculate() {
-        //does not work correctly in some cases -a -b != -(a - b)
+        String expression = "123 + 123";
+        RegexCalc calc = new RegexCalc();
+        Double res = calc.Calculate(expression);
+        assertEquals(246, res);
     }
 
     @Test
