@@ -6,7 +6,6 @@ import filemanagement.readers.TXTReader;
 import filemanagement.readers.XMLReader;
 import filemanagement.writers.JSONWriter;
 import filemanagement.writers.TXTWriter;
-import filemanagement.writers.XMLWriter;
 import filemanagement.writers.XMLWriterNonAPI;
 import forarchive.archivers.RarArchivator;
 import forarchive.dearchivers.RarDearchivator;
@@ -14,7 +13,6 @@ import forcrypto.decryptors.Decryptor;
 import forcrypto.encryptors.Encoder;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -22,19 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CLI {
-    // command "cd filename"
-    // command "dir"
-    // command "encode filename"
-    // command "decode filename"
-    // command "addtoarch filename"
-    // command "cleartoarch"
-    // command "rar rarfile"
-    // command "zip zipfile"
-    // command "dezip zipfile"
-    // command "derar rarfile"
-    // command "read filename\s(normal file)"
-    // command "calculate"
-    // command "write"
+
     // This method encodes a file using the Encoder class
     void encode(String inputFileName) {
         dir();

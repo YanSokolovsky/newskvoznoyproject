@@ -48,16 +48,15 @@ class RegexCalcTest {
         String expression3 = "2.3+12";
         String expression4 = "2.3-12";
         String expression5 = "2.3^12";
-        /*Double res1 = 27.6;
-        Double res2 = 0.2;
-        Double res3 = 14.3;
-        Double res4 = 9.7;
-        Double res5 = 21914.6244;
+        double res1 = 27.6;
+        double res2 = 0.2;
+        double res3 = 14.3;
+        double res4 = 9.7;
+        double res5 = 21914.6244;
         assertTrue(res1 - Double.parseDouble(calc.calculateAtomicExpression(expression1)) < 0.0000000001);
         assertTrue((res2 - Double.parseDouble(calc.calculateAtomicExpression(expression1)) < 0.0000000001));
         assertTrue((res3 - Double.parseDouble(calc.calculateAtomicExpression(expression1)) < 0.0000000001));
         assertTrue((res4 - Double.parseDouble(calc.calculateAtomicExpression(expression1)) < 0.0000000001));
-        assertTrue((res5 - Double.parseDouble(calc.calculateAtomicExpression(expression1)) < 0.0000000001));
-         */
+        assertTrue((Double.parseDouble(calc.calculateAtomicExpression(expression1)) - res5 < 0.0000000001));
     }
 }
